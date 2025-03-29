@@ -1,11 +1,14 @@
 package com.thepriyanshiprateek.eshop_rest_api.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,6 +21,9 @@ public class Category {
             strategy = GenerationType.IDENTITY
     )
     private Long id;
+
+    @NotEmpty(message = "Name is required")
+    @Column(nullable = false, unique = true)
     private String name;
     @Setter
     private String image;
@@ -27,25 +33,5 @@ public class Category {
             orphanRemoval = true
     )
     private List<Product> products;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImage() {
-        return image;
-    }
 
 }
